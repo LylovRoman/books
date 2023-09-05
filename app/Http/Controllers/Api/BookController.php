@@ -11,8 +11,20 @@ class BookController extends Controller
 {
     public function list() : JsonResponse
     {
+        $books = Book::with('author')->get();
+
+        $data = $books->map(function ($book) {
+            return [
+                'id' => $book->id,
+                'name' => $book->name,
+                'author' => $book->author->name,
+                'created_at' => $book->created_at,
+                'updated_at' => $book->updated_at,
+            ];
+        });
+
         return response()->json([
-            'data' => Book::all()
+            'data' => $data
         ], 200);
     }
 
@@ -23,21 +35,32 @@ class BookController extends Controller
         ], 200);
     }
 
-    public function update(BookRequest $request) : JsonResponse
+    public function update(BookRequest $request, $id) : JsonResponse
     {
         $validated = $request->validated();
 
-        return response()->json([
-            'data' => Book::query()->updateOrCreate([
+        $book = Book::query()->find($id);
+
+        if ($book) {
+            $book->update([
                 'name' => $validated['name'],
                 'author_id' => $validated['author_id']
-            ])
-        ], 200);
+            ]);
+
+            return response()->json([
+                'message' => 'Книга успешно обновлена',
+                'data' => $book
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Книга не найдена'
+            ], 404);
+        }
     }
 
     public function destroy($id) : JsonResponse
     {
         Book::find($id)->delete();
-        return response()->json([], 204);
+        return response()->json(['message' => 'Книга удалена'], 204);
     }
 }
