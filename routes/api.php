@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Регистрация пользователей
-Route::post('/register', [AuthController::class, 'register']);
+//Route::post('/register', [AuthController::class, 'register']);
+
+//Аутентификация пользователей
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
