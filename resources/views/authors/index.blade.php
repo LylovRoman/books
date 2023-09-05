@@ -3,7 +3,11 @@
 @section('title', 'Авторы')
 
 @section('content')
-    <h1>Авторы<a href="{{ route('authors.create') }}" style="text-decoration: none">+</a></h1>
+    <h1>Авторы
+        @if(Auth::check())
+            <a href="{{ route('authors.create') }}" style="text-decoration: none">+</a>
+        @endif
+    </h1>
     <table class="table">
         <thead>
         <tr>
