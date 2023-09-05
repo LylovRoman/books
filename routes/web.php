@@ -25,6 +25,10 @@ Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::get('/', function () {
+    return redirect()->route('books.index');
+});
+
 Route::group(['prefix' => '/books'], function () {
     Route::middleware('auth')->group(function (){
         Route::get('/create', [BookController::class, 'create'])->name('books.create');
