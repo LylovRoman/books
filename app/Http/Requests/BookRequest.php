@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class BookRequest extends FormRequest
 {
@@ -25,5 +26,10 @@ class BookRequest extends FormRequest
             'name' => 'required|string',
             'author_id' => 'required|exists:authors,id'
         ];
+    }
+
+    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        throw new HttpResponseException(response()->json(["errors" => $validator->errors()], 422));
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class AuthorRequest extends FormRequest
 {
@@ -24,5 +25,10 @@ class AuthorRequest extends FormRequest
         return [
             'name' => 'required|string'
         ];
+    }
+
+    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        throw new HttpResponseException(response()->json(["errors" => $validator->errors()], 422));
     }
 }
