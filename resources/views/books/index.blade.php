@@ -26,10 +26,8 @@
                 <th scope="row">{{ $book->id }}</th>
                 <td><a href="{{ route('books.show', ['book' => $book]) }}" style="text-decoration: none">{{ $book->name }}</a></td>
                 <td>{{ $book->author->name }}</td>
-                @if(Auth::check())
-                    <th scope="col"><a href="{{ route('books.edit', ['book' => $book]) }}" style="text-decoration: none">✏️</a></th>
-                    <th scope="col"><a href="{{ route('books.destroy', ['book' => $book]) }}" style="text-decoration: none">❌</a></th>
-                @endif
+                <th scope="col"><a href="{{ route('books.edit', ['book' => $book]) }}" style="text-decoration: none">✏️</a></th>
+                <th scope="col"><a href="{{ route('books.destroy', ['book' => $book]) }}" style="text-decoration: none">❌</a></th>
             </tr>
         @endforeach
         </tbody>

@@ -26,10 +26,8 @@
                 <th scope="row">{{ $author->id }}</th>
                 <td><a href="{{ route('authors.show', ['author' => $author]) }}" style="text-decoration: none">{{ $author->name }}</a></td>
                 <td>{{ $author->books_count }}</td>
-                @if(Auth::check())
-                    <td><a href="{{ route('authors.edit', ['author' => $author]) }}" style="text-decoration: none">✏️</a></td>
-                    <td><a href="{{ route('authors.destroy', ['author' => $author]) }}" style="text-decoration: none">❌</a></td>
-                @endif
+                <td><a href="{{ route('authors.edit', ['author' => $author]) }}" style="text-decoration: none">✏️</a></td>
+                <td><a href="{{ route('authors.destroy', ['author' => $author]) }}" style="text-decoration: none">❌</a></td>
             </tr>
         @endforeach
         </tbody>

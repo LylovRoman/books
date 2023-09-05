@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
+use App\Models\Author;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,29 +27,31 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/', function () {
-    return redirect()->route('books.index');
-});
+    $authors = Author::query()->with('books')->get();
 
-Route::group(['prefix' => '/books'], function () {
-    Route::middleware('auth')->group(function (){
-        Route::get('/create', [BookController::class, 'create'])->name('books.create');
-        Route::post('/', [BookController::class, 'store'])->name('books.store');
-        Route::get('/{book}/edit', [BookController::class, 'edit'])->name('books.edit');
-        Route::post('/{book}', [BookController::class, 'update'])->name('books.update');
-        Route::get('/{book}/delete', [BookController::class, 'destroy'])->name('books.destroy');
+    return view('main', compact('authors'));
+})->name('main');
+
+Route::middleware('auth')->group(function (){
+    Route::group(['prefix' => '/books'], function () {
+        Route::middleware('auth')->group(function (){
+            Route::get('/create', [BookController::class, 'create'])->name('books.create');
+            Route::post('/', [BookController::class, 'store'])->name('books.store');
+            Route::get('/{book}/edit', [BookController::class, 'edit'])->name('books.edit');
+            Route::post('/{book}', [BookController::class, 'update'])->name('books.update');
+            Route::get('/{book}/delete', [BookController::class, 'destroy'])->name('books.destroy');
+            Route::get('/', [BookController::class, 'index'])->name('books.index');
+            Route::get('/{book}', [BookController::class, 'show'])->name('books.show');
+        });
     });
-    Route::get('/', [BookController::class, 'index'])->name('books.index');
-    Route::get('/{book}', [BookController::class, 'show'])->name('books.show');
-});
+    Route::group(['prefix' => '/authors'], function () {
 
-Route::group(['prefix' => '/authors'], function () {
-    Route::middleware('auth')->group(function (){
         Route::get('/create', [AuthorController::class, 'create'])->name('authors.create');
         Route::post('/', [AuthorController::class, 'store'])->name('authors.store');
         Route::get('/{author}/edit', [AuthorController::class, 'edit'])->name('authors.edit');
         Route::post('/{author}', [AuthorController::class, 'update'])->name('authors.update');
         Route::get('/{author}/delete', [AuthorController::class, 'destroy'])->name('authors.destroy');
+        Route::get('/', [AuthorController::class, 'index'])->name('authors.index');
+        Route::get('/{author}', [AuthorController::class, 'show'])->name('authors.show');
     });
-    Route::get('/', [AuthorController::class, 'index'])->name('authors.index');
-    Route::get('/{author}', [AuthorController::class, 'show'])->name('authors.show');
 });

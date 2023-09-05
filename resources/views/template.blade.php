@@ -11,9 +11,10 @@
     <div class="container">
         <header class="d-flex justify-content-center py-3">
             <ul class="nav nav-pills">
-                <li class="nav-item"><a href="{{ route('authors.index') }}" class="nav-link {{ request()->is('authors*') ? 'active' : '' }}" aria-current="page">Авторы</a></li>
-                <li class="nav-item"><a href="{{ route('books.index') }}" class="nav-link {{ request()->is('books*') ? 'active' : '' }}">Книги</a></li>
+                <li class="nav-item"><a href="{{ route('main') }}" class="nav-link {{ request()->is('main') ? 'active' : '' }}">Главная</a></li>
                 @if(Auth::check())
+                    <li class="nav-item"><a href="{{ route('authors.index') }}" class="nav-link {{ request()->is('authors*') ? 'active' : '' }}" aria-current="page">Авторы</a></li>
+                    <li class="nav-item"><a href="{{ route('books.index') }}" class="nav-link {{ request()->is('books*') ? 'active' : '' }}">Книги</a></li>
                     <li class="nav-item"><a href="{{ route('logout') }}" class="nav-link">Выйти</a></li>
                 @else
                     <li class="nav-item"><a href="{{ route('login') }}" class="nav-link {{ request()->is('login') ? 'active' : '' }}">Авторизоваться</a></li>
