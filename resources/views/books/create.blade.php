@@ -9,7 +9,11 @@
         <label for="name">Название:</label>
         <input type="text" name="name" id="name">
         <label for="author_id">Автор:</label>
-        <input type="number" name="author_id" id="author_id">
+        <select name="author_id" id="author_id">
+            @foreach($authors as $author)
+                <option value="{{ $author->id }}">{{ $author->name }}</option>
+            @endforeach
+        </select>
         <button type="submit">Отправить</button>
     </form>
 @endsection

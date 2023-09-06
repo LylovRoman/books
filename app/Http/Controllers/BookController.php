@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BookRequest;
+use App\Models\Author;
 use App\Models\Book;
 
 class BookController extends Controller
@@ -15,7 +16,9 @@ class BookController extends Controller
     }
     public function create()
     {
-        return view('books.create');
+        $authors = Author::all();
+
+        return view('books.create', compact('authors'));
     }
     public function store(BookRequest $request)
     {
@@ -36,7 +39,8 @@ class BookController extends Controller
 
     public function edit(Book $book)
     {
-        return view('books.edit', compact('book'));
+        $authors = Author::all();
+        return view('books.edit', compact(['book', 'authors']));
     }
     public function update(BookRequest $request, Book $book)
     {
