@@ -3,6 +3,8 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\Export\AuthorExportController;
+use App\Http\Controllers\Export\BookExportController;
 use App\Models\Author;
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +42,9 @@ Route::middleware('auth')->group(function (){
             Route::get('/{book}/edit', [BookController::class, 'edit'])->name('books.edit');
             Route::post('/{book}', [BookController::class, 'update'])->name('books.update');
             Route::get('/{book}/delete', [BookController::class, 'destroy'])->name('books.destroy');
+            Route::get('/export/csv', [BookExportController::class, 'csv'])->name('books.export.csv');
+            Route::get('/export/xls', [BookExportController::class, 'xls'])->name('books.export.xls');
+            Route::get('/export/pdf', [BookExportController::class, 'pdf'])->name('books.export.pdf');
             Route::get('/', [BookController::class, 'index'])->name('books.index');
             Route::get('/{book}', [BookController::class, 'show'])->name('books.show');
         });
@@ -51,6 +56,9 @@ Route::middleware('auth')->group(function (){
         Route::get('/{author}/edit', [AuthorController::class, 'edit'])->name('authors.edit');
         Route::post('/{author}', [AuthorController::class, 'update'])->name('authors.update');
         Route::get('/{author}/delete', [AuthorController::class, 'destroy'])->name('authors.destroy');
+        Route::get('/export/csv', [AuthorExportController::class, 'csv'])->name('authors.export.csv');
+        Route::get('/export/xls', [AuthorExportController::class, 'xls'])->name('authors.export.xls');
+        Route::get('/export/pdf', [AuthorExportController::class, 'pdf'])->name('authors.export.pdf');
         Route::get('/', [AuthorController::class, 'index'])->name('authors.index');
         Route::get('/{author}', [AuthorController::class, 'show'])->name('authors.show');
     });
