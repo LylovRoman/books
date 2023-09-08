@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('password');
+            $table->enum('role', ['user', 'admin'])->default('user');
             $table->string('api_token')->nullable();
             $table->timestamps();
         });

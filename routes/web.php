@@ -20,8 +20,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Регистрация пользователей
-//Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
-//Route::post('/register', [AuthController::class, 'register']);
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
 
 // Аутентификация пользователей
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -34,23 +34,20 @@ Route::get('/', function () {
     return view('main', compact('authors'));
 })->name('main');
 
-Route::middleware('auth')->group(function (){
+Route::middleware('auth')->middleware('role:admin')->group(function (){
     Route::group(['prefix' => '/books'], function () {
-        Route::middleware('auth')->group(function (){
-            Route::get('/create', [BookController::class, 'create'])->name('books.create');
-            Route::post('/', [BookController::class, 'store'])->name('books.store');
-            Route::get('/{book}/edit', [BookController::class, 'edit'])->name('books.edit');
-            Route::post('/{book}', [BookController::class, 'update'])->name('books.update');
-            Route::get('/{book}/delete', [BookController::class, 'destroy'])->name('books.destroy');
-            Route::get('/export/csv', [BookExportController::class, 'csv'])->name('books.export.csv');
-            Route::get('/export/xls', [BookExportController::class, 'xls'])->name('books.export.xls');
-            Route::get('/export/pdf', [BookExportController::class, 'pdf'])->name('books.export.pdf');
-            Route::get('/', [BookController::class, 'index'])->name('books.index');
-            Route::get('/{book}', [BookController::class, 'show'])->name('books.show');
-        });
+        Route::get('/create', [BookController::class, 'create'])->name('books.create');
+        Route::post('/', [BookController::class, 'store'])->name('books.store');
+        Route::get('/{book}/edit', [BookController::class, 'edit'])->name('books.edit');
+        Route::post('/{book}', [BookController::class, 'update'])->name('books.update');
+        Route::get('/{book}/delete', [BookController::class, 'destroy'])->name('books.destroy');
+        Route::get('/export/csv', [BookExportController::class, 'csv'])->name('books.export.csv');
+        Route::get('/export/xls', [BookExportController::class, 'xls'])->name('books.export.xls');
+        Route::get('/export/pdf', [BookExportController::class, 'pdf'])->name('books.export.pdf');
+        Route::get('/', [BookController::class, 'index'])->name('books.index');
+        Route::get('/{book}', [BookController::class, 'show'])->name('books.show');
     });
     Route::group(['prefix' => '/authors'], function () {
-
         Route::get('/create', [AuthorController::class, 'create'])->name('authors.create');
         Route::post('/', [AuthorController::class, 'store'])->name('authors.store');
         Route::get('/{author}/edit', [AuthorController::class, 'edit'])->name('authors.edit');

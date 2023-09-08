@@ -32,4 +32,7 @@
         @endforeach
         </tbody>
     </table>
+    <a href="{{ route('authors.export.pdf') }}">Скачать PDF</a>
+    <a href="{{ route('authors.export.csv') }}">Скачать CSV</a>
+    <a href="{{ route('authors.export.xls') }}">Скачать XLS</a>
 @endsection
