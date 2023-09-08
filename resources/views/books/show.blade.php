@@ -8,5 +8,6 @@
         <li class="list-group-item">ID: {{ $book->id }}</li>
         <li class="list-group-item">Имя: {{ $book->name }}</li>
         <li class="list-group-item">ID автора: {{ $book->author_id }}</li>
+        <li class="list-group-item">Количество: {{ $book->quantity }}</li>
     </ul>
 @endsection

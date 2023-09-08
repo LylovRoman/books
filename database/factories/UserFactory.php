@@ -18,9 +18,9 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => 'Admin',
+            'name' => $this->faker->name,
             'password' => bcrypt('password'),
-            'role' => 'admin'
+            'role' => 'user'
         ];
     }
 

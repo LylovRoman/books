@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class BookRequest extends FormRequest
+class BookUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +23,9 @@ class BookRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string',
-            'author_id' => 'required|exists:authors,id',
-            'quantity' => 'required|integer|between:0,10000'
+            'book_id' => 'required|exists:books,id',
+            'user_id' => 'required|exists:users,id',
+            'return_date' => 'required|date'
         ];
     }
 

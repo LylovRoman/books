@@ -19,15 +19,18 @@ class BookSeeder extends Seeder
         ]);
         Book::create([
             'name' => 'Золотая рыбка',
-            'author_id' => $author->id
+            'author_id' => $author->id,
+            'quantity' => 5
         ]);
         Book::create([
             'name' => 'Евгений Онегин',
-            'author_id' => $author->id
+            'author_id' => $author->id,
+            'quantity' => 5
         ]);
         Book::create([
             'name' => 'Дубровский',
-            'author_id' => $author->id
+            'author_id' => $author->id,
+            'quantity' => 5
         ]);
 
         $author = Author::create([
@@ -35,15 +38,18 @@ class BookSeeder extends Seeder
         ]);
         Book::create([
             'name' => 'Преступление и наказание',
-            'author_id' => $author->id
+            'author_id' => $author->id,
+            'quantity' => 5
         ]);
         Book::create([
             'name' => 'Идиот',
-            'author_id' => $author->id
+            'author_id' => $author->id,
+            'quantity' => 5
         ]);
         Book::create([
             'name' => 'Белые ночи',
-            'author_id' => $author->id
+            'author_id' => $author->id,
+            'quantity' => 5
         ]);
 
         $author = Author::create([
@@ -51,15 +57,18 @@ class BookSeeder extends Seeder
         ]);
         Book::create([
             'name' => 'Тарас Бульба',
-            'author_id' => $author->id
+            'author_id' => $author->id,
+            'quantity' => 5
         ]);
         Book::create([
             'name' => 'Мёртвые души',
-            'author_id' => $author->id
+            'author_id' => $author->id,
+            'quantity' => 5
         ]);
         Book::create([
             'name' => 'Ревизор',
-            'author_id' => $author->id
+            'author_id' => $author->id,
+            'quantity' => 5
         ]);
     }
 }

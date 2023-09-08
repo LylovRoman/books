@@ -26,7 +26,8 @@ class BookController extends Controller
 
         Book::query()->create([
                 'name' => $validated['name'],
-                'author_id' => $validated['author_id']
+                'author_id' => $validated['author_id'],
+                'quantity' => $validated['quantity']
         ]);
 
         return redirect()->route('books.index');
@@ -48,7 +49,8 @@ class BookController extends Controller
 
         $book->update([
             'name' => $validated['name'],
-            'author_id' => $validated['author_id']
+            'author_id' => $validated['author_id'],
+            'quantity' => $validated['quantity']
         ]);
 
         return redirect()->route('books.index');

@@ -18,6 +18,7 @@ class BookController extends Controller
                 'id' => $book->id,
                 'name' => $book->name,
                 'author' => $book->author->name,
+                'quantity' => $book->quantity,
                 'created_at' => $book->created_at,
                 'updated_at' => $book->updated_at,
             ];

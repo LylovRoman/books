@@ -14,6 +14,8 @@
                 <option value="{{ $author->id }}">{{ $author->name }}</option>
             @endforeach
         </select>
+        <label for="quantity">Количество:</label>
+        <input type="number" name="quantity" id="quantity">
         <button type="submit">Отправить</button>
     </form>
 @endsection

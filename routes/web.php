@@ -3,8 +3,10 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\BookUserController;
 use App\Http\Controllers\Export\AuthorExportController;
 use App\Http\Controllers\Export\BookExportController;
+use App\Http\Controllers\Export\BookUserExportController;
 use App\Http\Controllers\Export\UserExportController;
 use App\Http\Controllers\UserController;
 use App\Models\Author;
@@ -70,5 +72,17 @@ Route::middleware('auth')->middleware('role:admin')->group(function (){
         Route::get('/export/pdf', [UserExportController::class, 'pdf'])->name('users.export.pdf');
         Route::get('/', [UserController::class, 'index'])->name('users.index');
         Route::get('/{user}', [UserController::class, 'show'])->name('users.show');
+    });
+    Route::group(['prefix' => '/book-user'], function () {
+        Route::get('/create', [BookUserController::class, 'create'])->name('book-user.create');
+        Route::post('/', [BookUserController::class, 'store'])->name('book-user.store');
+        Route::get('/{bookuser}/edit', [BookUserController::class, 'edit'])->name('book-user.edit');
+        Route::post('/{bookuser}', [BookUserController::class, 'update'])->name('book-user.update');
+        Route::get('/{bookuser}/delete', [BookUserController::class, 'destroy'])->name('book-user.destroy');
+        Route::get('/export/csv', [BookUserExportController::class, 'csv'])->name('book-user.export.csv');
+        Route::get('/export/xls', [BookUserExportController::class, 'xls'])->name('book-user.export.xls');
+        Route::get('/export/pdf', [BookUserExportController::class, 'pdf'])->name('book-user.export.pdf');
+        Route::get('/', [BookUserController::class, 'index'])->name('book-user.index');
+        Route::get('/{bookuser}', [BookUserController::class, 'show'])->name('book-user.show');
     });
 });
