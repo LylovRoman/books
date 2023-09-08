@@ -14,8 +14,9 @@
                 <li class="nav-item"><a href="{{ route('main') }}" class="nav-link {{ request()->is('/') ? 'active' : '' }}">Главная</a></li>
                 @if(Auth::check())
                     @if(Auth::user()->role === "admin")
-                        <li class="nav-item"><a href="{{ route('authors.index') }}" class="nav-link {{ request()->is('authors*') ? 'active' : '' }}" aria-current="page">Авторы</a></li>
+                        <li class="nav-item"><a href="{{ route('authors.index') }}" class="nav-link {{ request()->is('authors*') ? 'active' : '' }}">Авторы</a></li>
                         <li class="nav-item"><a href="{{ route('books.index') }}" class="nav-link {{ request()->is('books*') ? 'active' : '' }}">Книги</a></li>
+                        <li class="nav-item"><a href="{{ route('users.index') }}" class="nav-link {{ request()->is('users*') ? 'active' : '' }}">Пользователи</a></li>
                     @endif
                     <li class="nav-item"><a href="{{ route('logout') }}" class="nav-link">Выйти</a></li>
                     <li class="nav-item"><a class="nav-link">👤 {{ Auth::user()->name }}</a></li>

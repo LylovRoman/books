@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\BookController;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Export\UserExportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,11 +27,19 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::group(['prefix' => 'v1'], function () {
     Route::group(['prefix' => 'books'], function () {
-            Route::get('/list', [BookController::class, 'list'])->name('api.books.list');
-            Route::get('/by-id/{id}', [BookController::class, 'byId'])->name('api.books.by-id');
-        Route::middleware('auth:api')->group(function (){
+        Route::get('/list', [BookController::class, 'list'])->name('api.books.list');
+        Route::get('/by-id/{id}', [BookController::class, 'byId'])->name('api.books.by-id');
+        Route::middleware('role:admin')->group(function (){
             Route::post('/update/{id}', [BookController::class, 'update'])->name('api.books.update');
             Route::delete('/{id}', [BookController::class, 'destroy'])->name('api.books.destroy');
+        });
+    });
+    Route::group(['prefix' => '/users'], function () {
+        Route::get('/', [UserController::class, 'index'])->name('api.users.index');
+        Route::get('/{id}', [UserController::class, 'show'])->name('api.users.show');
+        Route::middleware('role:admin')->group(function (){
+            Route::post('/{id}/update', [UserController::class, 'update'])->name('api.users.update');
+            Route::delete('/{id}', [UserController::class, 'destroy'])->name('api.users.destroy');
         });
     });
 });

@@ -1,6 +1,6 @@
 @extends('templatePdf')
 
-@section('title', 'Книги')
+@section('title', 'Авторы')
 
 @section('content')
     <p>Авторы</p>

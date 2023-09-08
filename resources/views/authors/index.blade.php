@@ -14,10 +14,8 @@
             <th scope="col">#</th>
             <th scope="col">Автор</th>
             <th scope="col">Количество книг</th>
-            @if(Auth::check())
-                <th scope="col">Редактировать</th>
-                <th scope="col">Удалить</th>
-            @endif
+            <th scope="col">Редактировать</th>
+            <th scope="col">Удалить</th>
         </tr>
         </thead>
         <tbody>

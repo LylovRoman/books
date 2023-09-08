@@ -5,6 +5,8 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\Export\AuthorExportController;
 use App\Http\Controllers\Export\BookExportController;
+use App\Http\Controllers\Export\UserExportController;
+use App\Http\Controllers\UserController;
 use App\Models\Author;
 use Illuminate\Support\Facades\Route;
 
@@ -58,5 +60,15 @@ Route::middleware('auth')->middleware('role:admin')->group(function (){
         Route::get('/export/pdf', [AuthorExportController::class, 'pdf'])->name('authors.export.pdf');
         Route::get('/', [AuthorController::class, 'index'])->name('authors.index');
         Route::get('/{author}', [AuthorController::class, 'show'])->name('authors.show');
+    });
+    Route::group(['prefix' => '/users'], function () {
+        Route::get('/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+        Route::post('/{user}', [UserController::class, 'update'])->name('users.update');
+        Route::get('/{user}/delete', [UserController::class, 'destroy'])->name('users.destroy');
+        Route::get('/export/csv', [UserExportController::class, 'csv'])->name('users.export.csv');
+        Route::get('/export/xls', [UserExportController::class, 'xls'])->name('users.export.xls');
+        Route::get('/export/pdf', [UserExportController::class, 'pdf'])->name('users.export.pdf');
+        Route::get('/', [UserController::class, 'index'])->name('users.index');
+        Route::get('/{user}', [UserController::class, 'show'])->name('users.show');
     });
 });
